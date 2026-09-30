@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>获取软件 · lch收发助手</title>
+<meta name="description" content="lch收发助手 部署包、桌面客户端与配套文档的下载入口。">
+<style>
+:root{
+  --fg:#131a2a; --body:#f7f8fc; --muted:#5c6580; --line:#e6e9f2;
+  --brand:#3b5bfd; --brand-2:#7c3aed; --brand-soft:#eef1ff;
+  --radius:18px; --max:1000px;
+  --shadow-sm:0 1px 2px rgba(13,20,36,.05),0 4px 14px rgba(13,20,36,.06);
+  --shadow-md:0 10px 30px rgba(13,20,36,.09);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--body);color:var(--fg);
+  font:16px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","PingFang SC","Hiragino Sans GB",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3{margin:0;line-height:1.3}
+p{margin:0}
+code{font-family:Consolas,"Cascadia Mono",monospace;background:#eef1f8;padding:1px 6px;border-radius:6px;font-size:13px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 22px}
+
+header{
+  position:sticky;top:0;z-index:30;
+  background:rgba(247,248,252,.86);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav{display:flex;align-items:center;gap:16px;height:66px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:16.5px;color:var(--fg)}
+.logo:hover{text-decoration:none}
+.logo .mark{
+  width:34px;height:34px;border-radius:10px;flex:0 0 34px;
+  background:linear-gradient(135deg,var(--brand),var(--brand-2));
+  color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;
+  box-shadow:0 6px 16px rgba(59,91,253,.35);
+}
+.logo small{display:block;font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.3px}
+.nav .btn{margin-left:auto}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 18px;border-radius:12px;font-size:14px;font-weight:600;
+  border:1px solid transparent;cursor:pointer;transition:.18s;white-space:nowrap;font-family:inherit;
+}
+.btn:hover{text-decoration:none;transform:translateY(-1px)}
+.btn-p{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 10px 24px rgba(59,91,253,.3)}
+.btn-p:hover{box-shadow:0 14px 30px rgba(59,91,253,.4)}
+.btn-g{background:#fff;color:var(--fg);border-color:var(--line);box-shadow:var(--shadow-sm)}
+.btn-g:hover{border-color:#c9d2f0;color:var(--brand)}
+
+.hero{
+  background:
+    radial-gradient(900px 420px at 12% -20%,rgba(59,91,253,.16),transparent 60%),
+    radial-gradient(760px 400px at 92% 0%,rgba(124,58,237,.14),transparent 62%),
+    linear-gradient(180deg,#fbfcff,#f4f6fd);
+  padding:56px 0 46px;border-bottom:1px solid var(--line);
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:13px;font-weight:700;letter-spacing:.6px;
+  color:var(--brand);background:var(--brand-soft);
+  padding:5px 13px;border-radius:999px;margin-bottom:14px;
+}
+.hero h1{font-size:clamp(28px,4vw,40px);font-weight:900;letter-spacing:-1px}
+.hero .lead{color:#47506b;font-size:16.5px;margin-top:14px;max-width:640px}
+
+.body-sec{padding-top:44px;padding-bottom:70px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.card{
+  background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+  padding:22px;box-shadow:var(--shadow-sm);transition:.22s;
+  display:flex;flex-direction:column;gap:18px;
+}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);border-color:#d5ddf7}
+.card-head{display:flex;gap:14px;align-items:flex-start}
+.card-head .ico{
+  width:46px;height:46px;flex:0 0 46px;border-radius:13px;background:var(--brand-soft);
+  display:flex;align-items:center;justify-content:center;font-size:22px;
+}
+.card-head .ttl{min-width:0}
+.card-head .ttl b{display:block;font-size:17px;font-weight:800}
+.card-head .ttl span{display:block;font-size:13.5px;color:var(--muted);margin-top:4px;line-height:1.6}
+.card-foot{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto}
+
+.empty{
+  background:#fff;border:1px dashed #cdd6ef;border-radius:var(--radius);
+  padding:46px 24px;text-align:center;box-shadow:var(--shadow-sm);
+}
+.empty .em{font-size:38px;display:block;margin-bottom:10px}
+.empty b{font-size:18px}
+.empty p{color:var(--muted);font-size:14.6px;margin-top:8px}
+
+.notes{
+  margin-top:38px;background:#fff;border:1px solid var(--line);
+  border-radius:var(--radius);padding:24px 26px;box-shadow:var(--shadow-sm);
+}
+.notes h3{font-size:16.5px;font-weight:800}
+.notes ul{margin:12px 0 0;padding-left:20px;color:#3f4862;font-size:14.8px}
+.notes li{margin-top:7px}
+
+footer{border-top:1px solid var(--line);background:#fff}
+.fbot{
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center;
+  padding-top:20px;padding-bottom:20px;font-size:13.4px;color:#7c88a8;
+}
+
+.toast{
+  position:fixed;left:50%;bottom:32px;transform:translateX(-50%);
+  background:#0b1225;color:#fff;padding:11px 20px;border-radius:12px;
+  font-size:14px;box-shadow:var(--shadow-md);z-index:99;white-space:nowrap;
+}
+.toast[hidden]{display:none}
+
+@media (max-width:560px){
+  .hero{padding:40px 0 34px}
+  .logo small{display:none}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="mark">📮</span>
+      <span>lch收发助手<small>获取软件</small></span>
+    </a>
+    <a class="btn btn-g" href="index.html">← 返回首页</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <span class="eyebrow">⬇️ 下载与获取</span>
+      <h1>获取软件</h1>
+      <p class="lead">
+        部署包、桌面客户端与解压缩软件统一放在网盘。点开对应卡片即可跳转网盘；
+        有提取码的，点一下按钮就能复制。
+      </p>
+    </div>
+  </section>
+
+  <section class="wrap body-sec">
+    <div class="empty" id="emptyHint" hidden>
+      <span class="em">📭</span>
+      <b>暂时还没有可用的下载地址</b>
+      <p>请联系维护者获取部署包：<br><a href="mailto:cavanluo@hotmail.com">cavanluo@hotmail.com</a></p>
+    </div>
+
+    <div class="grid" id="cards"></div>
+
+    <div class="notes">
+      <h3>下载前请确认</h3>
+      <ul>
+        <li>部署包运行在 <b>Windows 主机</b> 上，免安装运行环境，整个文件夹拷贝过去双击启动即可。</li>
+        <li>桌面客户端用于 <b>跨网络组网</b>，需整目录拷贝；首次运行会请求管理员权限以安装虚拟网卡驱动。</li>
+        <li>若杀毒软件误报，请把 <b>整个程序目录</b> 加入信任区，不要只添加单个文件。</li>
+        <li>链接失效或获取不到，可邮件联系 <a href="mailto:cavanluo@hotmail.com">cavanluo@hotmail.com</a>。</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap fbot">
+    <span>© 2026 lch收发助手 · 维护者 lch</span>
+    <span>闭源软件 · 仅游戏开发接口对外开放 · 版本 v1.2.0</span>
+  </div>
+</footer>
+
+<div class="toast" id="toast" hidden></div>
+
+<!-- 下载链接数据统一放在 downloads.js，官网首页与下载页共用同一份 -->
+<script src="downloads.js"></script>
+
+<script>
+(function () {
+  'use strict';
+
+  var STORE_KEY = 'lch_download_links_v1';
+  var DEFAULT_DATA = (window.LCH_DOWNLOADS || []).slice();
+
+  var cardsEl = document.getElementById('cards');
+  var emptyEl = document.getElementById('emptyHint');
+  var toastEl = document.getElementById('toast');
+  var toastTimer = null;
+
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.hidden = true; }, 1900);
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(
+        function () { toast('已复制提取码'); },
+        function () { fallbackCopy(text); }
+      );
+    } else {
+      fallbackCopy(text);
+    }
+  }
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); toast('已复制提取码'); }
+    catch (e) { toast('复制失败，请手动选择'); }
+    document.body.removeChild(ta);
+  }
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORE_KEY);
+      if (raw !== null) {
+        var d = JSON.parse(raw);
+        if (Array.isArray(d)) return d;
+      }
+    } catch (e) { /* ignore */ }
+    return clone(DEFAULT_DATA);
+  }
+
+  function render() {
+    var data = load();
+    var list = data.filter(function (it) { return it && it.url; });
+
+    cardsEl.innerHTML = '';
+
+    if (!list.length) {
+      emptyEl.hidden = false;
+      return;
+    }
+    emptyEl.hidden = true;
+
+    list.forEach(function (it) {
+      var card = document.createElement('article');
+      card.className = 'card';
+
+      var codeHtml = '';
+      if (it.code) {
+        codeHtml = '<button class="btn btn-g copy" type="button" data-code="' +
+                   esc(it.code) + '">🔑 提取码 ' + esc(it.code) + '</button>';
+      }
+
+      card.innerHTML =
+        '<div class="card-head">' +
+          '<span class="ico">' + esc(it.icon || '📁') + '</span>' +
+          '<div class="ttl">' +
+            '<b>' + esc(it.name || '未命名') + '</b>' +
+            (it.note ? '<span>' + esc(it.note) + '</span>' : '') +
+          '</div>' +
+        '</div>' +
+        '<div class="card-foot">' +
+          '<a class="btn btn-p" href="' + esc(it.url) + '" target="_blank" rel="noopener noreferrer">打开网盘 ↗</a>' +
+          codeHtml +
+        '</div>';
+
+      cardsEl.appendChild(card);
+    });
+  }
+
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest ? e.target.closest('.copy') : null;
+    if (btn && btn.dataset.code) copyText(btn.dataset.code);
+  });
+
+  window.addEventListener('storage', function (e) {
+    if (e.key === STORE_KEY) render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
